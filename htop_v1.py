@@ -72,10 +72,10 @@ def getSENSORE():
 
 
 def getPROC():
-    res = {p.pid: p.info for p in ps.process_iter(['name', 'username'])}
-    # res=[]
-    # for proc in psutil.process_iter(['pid', 'name', 'username']):
-    #     res.append(proc)
+    #res = {p.pid: p.info for p in ps.process_iter(['name', 'username'])}
+    res=[]
+    for proc in ps.process_iter(['pid', 'name', 'username']):
+        res.append(proc)
 
     return res
 
@@ -137,9 +137,9 @@ def show(*args,**kwargs):
 
 
     for el in process:
-        pid = el
-        name = process[el]["name"]
-        username = process[el]["username"]
+        pid = el.info["pid"]
+        name = el.info["name"]
+        username = el.info["username"]
         print(OUTPUT["process"]["pid"].format(str(pid)+" "),
               OUTPUT["process"]["name"].format(name[:20]),
               OUTPUT["process"]["username"].format(username), sep=" | ")
